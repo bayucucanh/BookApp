@@ -1,11 +1,13 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Button, Input} from '../../Components';
+import { useSelector } from 'react-redux';
 
 const Register = () => {
+  const RegisterReducer = useSelector(state => state.RegisterReducer);
   const [form, setForm] = useState({
     name: '',
-    email: '',
+    email: '', 
     password: '',
   });
 
@@ -24,9 +26,13 @@ const Register = () => {
     });
   };
 
+  useEffect(() => {
+    console.log('global: ', RegisterReducer);
+  }, [])
+
   return (
     <View>
-      <Text>Register</Text>
+      <Text>{RegisterReducer.title}</Text>
       <Input
         placeholder="Full Name"
         value={form.fullName}
