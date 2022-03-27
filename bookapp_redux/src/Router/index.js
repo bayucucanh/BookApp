@@ -1,32 +1,18 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
-import {Facebook} from '../Assets';
-import {Rating, AirbnbRating} from 'react-native-ratings';
+import { HomeScreen, Login, Register, SplashScreen, WelcomeAuth } from '../Pages';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Icon name="rocket" size={30} color="#900" />
-      {/* <Image source={facebook}  style={{ width: 200 }}/> */}
-      <Facebook />
-      <Rating
-        showRating
-        // onFinishRating={this.ratingCompleted}
-        style={{paddingVertical: 10}}
-      />
-    </View>
-  );
-}
-
 const Router = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Navigator initialRouteName='Splash'>
+      <Stack.Screen name="Splash" component={SplashScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="Welcome" component={WelcomeAuth} options={{headerShown: false}}/>
+      <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+      <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+      <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   );
 };
