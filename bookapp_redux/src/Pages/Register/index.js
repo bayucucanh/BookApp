@@ -1,54 +1,58 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Button, Input} from '../../Components';
-import { useDispatch, useSelector } from 'react-redux';
-import { setForm } from '../../redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {setForm, Regis} from '../../redux';
 
 const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const {form} = useSelector(state => state.RegisterReducer);
   const dispatch = useDispatch();
   // const [form, setForm] = useState({
   //   name: '',
-  //   email: '', 
+  //   email: '',
   //   password: '',
   // });
 
   const sendData = () => {
-    console.log('form: ', form);
-    
+    const data = {
+      email: email,
+      password: password,
+      name: name,
+    };
+    console.log('form: ', data);
+    dispatch(Regis(data));
+    setName('');
+    setEmail('');
+    setPassword('');
   };
 
   // Apabila input sedang berubah maka terima value dari form
   const onInputChange = (value, inputType) => {
-    // Rubah form yang lama
-    // setForm({
-    //   // Ambil form yang lama, Jika tidak maka properti sebelumnya akan di remove
-    //   ...form,
-    //   // dengan value yang baru
-    //   [input]: value,
-    // });
-    dispatch(setForm(inputType, value))
+    dispatch(setForm(inputType, value));
   };
 
   return (
     <View>
-      <Text>{form.name}</Text>
+      <Text>Full Name</Text>
       <Input
         placeholder="Full Name"
-        value={form.name}
-        onChangeText={value => onInputChange(value, 'name')}
+        value={name}
+        onChangeText={text => setName(text)}
       />
-      <Text>{form.email}</Text>
+      <Text>Email</Text>
       <Input
         placeholder="Email"
-        value={form.email}
-        onChangeText={value => onInputChange(value, 'email')}
+        value={email}
+        onChangeText={text => setEmail(text)}
       />
-      <Text>{form.password}</Text>
+      <Text>Password</Text>
       <Input
         placeholder="Password"
-        value={form.password}
-        onChangeText={value => onInputChange(value, 'password')}
+        value={password}
+        onChangeText={text => setPassword(text)}
         secureTextEntry
       />
       <Button title="Register" onPress={sendData} />
