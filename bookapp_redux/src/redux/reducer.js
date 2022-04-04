@@ -13,7 +13,15 @@ const initialStateRegister = {
 }
 const initialStateLogin = {
   info: 'Masukan Username dan Password',
-  isLogin: true,
+  isLogin: false,
+  // id: '',
+  // token: '',
+  // refreshToken: '',
+  // expire: ''
+  form: {
+    email: '', 
+    password: '',
+  },
 }
 
 const RegisterReducer = (state = initialStateRegister, action) => {
@@ -29,28 +37,27 @@ const RegisterReducer = (state = initialStateRegister, action) => {
         [action.inputType]: action.inputValue
       }
     };
+    case 'REGISTER': return {
+      ...state,
+      form: [
+        ...state.form,
+        action.payload
+      ]
+    };
     default:  return state;
   }
-
-  // if (action.type === 'SET_TITLE') {
-  //   return  {
-  //     ...state,
-  //     title: 'Register ganti title'
-  //   }
-  // }
-  // if (action.type === 'SET_FORM') {
-  //   return {
-  //     ...state,
-  //     form: {
-  //       ...state.form,
-  //       [action.inputType]: action.inputValue
-  //     }
-  //   }
-  // }
-  // return state;
 }
 const LoginReducer = (state = initialStateLogin, action) => {
-  return state;
+  switch (action.type) {
+    case 'LOGIN':
+      return {
+        ...state,
+        ...action.payload,
+        isLogin: true
+        }  
+    default:
+    return state
+  }
 }
 const reducer = combineReducers({
   RegisterReducer,

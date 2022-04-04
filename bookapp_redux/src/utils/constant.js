@@ -1,0 +1,5 @@
+export const PRIMARY_COLOR = '#1d202b'
+export const SECOND_COLOR = '#fd9210'
+export const CARD_COLOR = '#2a2d37'
+export const PRIMARY_TEXT = '#FFFFff'
+export const SECOND_TEXT = '#383c43'
