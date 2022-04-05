@@ -37,15 +37,13 @@ export const Regis = data => async dispatch => {
 }
 
 export const LoggedIn = data => async dispatch => {
-  const navigation = useNavigation();
   try {
     await axios.post('http://code.aldipee.com/api/v1/auth/login', data)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       Alert.alert('Login Success')
       let userToken = response.data.tokens.access.token
       console.log(userToken);
-      navigation.navigate('Home')
     })
     dispatch(login(data))
   } catch (err) {
