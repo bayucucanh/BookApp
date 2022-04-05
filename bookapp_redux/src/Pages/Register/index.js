@@ -1,20 +1,26 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {Button, Input} from '../../Components';
+import {Input} from '../../Components';
 import {useDispatch, useSelector} from 'react-redux';
 import {setForm, Regis} from '../../redux';
+import styles from '../Login/styles';
+import {bgImageLogin} from '../../Assets';
+import {useNavigation} from '@react-navigation/native';
 
 const Register = () => {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {form} = useSelector(state => state.RegisterReducer);
+  // const {form} = useSelector(state => state.RegisterReducer);
   const dispatch = useDispatch();
-  // const [form, setForm] = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
 
   const sendData = () => {
     const data = {
@@ -27,39 +33,56 @@ const Register = () => {
     setName('');
     setEmail('');
     setPassword('');
+    navigation.navigate('RegisterSuccess')
   };
 
   // Apabila input sedang berubah maka terima value dari form
-  const onInputChange = (value, inputType) => {
-    dispatch(setForm(inputType, value));
-  };
+  // const onInputChange = (value, inputType) => {
+  //   dispatch(setForm(inputType, value));
+  // };
 
   return (
-    <View>
-      <Text>Full Name</Text>
-      <Input
-        placeholder="Full Name"
-        value={name}
-        onChangeText={text => setName(text)}
-      />
-      <Text>Email</Text>
-      <Input
-        placeholder="Email"
-        value={email}
-        onChangeText={text => setEmail(text)}
-      />
-      <Text>Password</Text>
-      <Input
-        placeholder="Password"
-        value={password}
-        onChangeText={text => setPassword(text)}
-        secureTextEntry
-      />
-      <Button title="Register" onPress={sendData} />
+    <View style={styles.container}>
+      <Image source={bgImageLogin} style={styles.imgBg} />
+      <View style={styles.listInput}>
+        <Text style={styles.title}>Create your account</Text>
+        <Input
+          placeholder="Full Name"
+          value={name}
+          onChangeText={text => setName(text)}
+        />
+        <Input
+          placeholder="Email"
+          value={email}
+          onChangeText={text => setEmail(text)}
+        />
+        <Input
+          placeholder="Password"
+          value={password}
+          onChangeText={text => setPassword(text)}
+          secureTextEntry
+        />
+      </View>
+      <View style={{padding: 22, marginTop: -30}}>
+        <Button title="Register" color="#fd9210" onPress={sendData} />
+        <Text
+          style={{color: '#ffffff', textAlign: 'center', marginVertical: 17}}>
+          Dont have an account ?
+        </Text>
+        <TouchableOpacity
+          style={styles.btnRegister}
+          onPress={() => navigation.navigate('Login')}>
+          <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
+            Login
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* <Button title="Register" onPress={sendData} /> */}
     </View>
   );
 };
 
 export default Register;
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});
