@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Button, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {Input} from '../../Components';
@@ -8,6 +8,7 @@ import {PRIMARY_COLOR} from '../../utils/constant';
 import {LoginDraw} from '../../Assets';
 import {bgImageLogin} from '../../Assets';
 import styles from './styles';
+import { getDataBooks } from '../../redux';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -27,6 +28,7 @@ const Login = () => {
     setPassword('');
     navigation.navigate('Home')
   };
+
 
   return (
     <View style={styles.container}>

@@ -1,68 +1,33 @@
-import { combineReducers } from "@reduxjs/toolkit";
-
 const initialState = {
-  name: 'Bayu Cucan',
-}
-const initialStateRegister = {
-  form: {
-    name: '',
-    email: '', 
-    password: '',
-  },
-  title: 'Register',
-}
-const initialStateLogin = {
-  info: 'Masukan Username dan Password',
+  user: [],
+  books: [],
+  bookDetail: [],
   isLogin: false,
-  // id: '',
-  // token: '',
-  // refreshToken: '',
-  // expire: ''
-  form: {
-    email: '', 
-    password: '',
-  },
-}
+  isLoading: false,
+};
 
-const RegisterReducer = (state = initialStateRegister, action) => {
-  switch (action.type) {
-    case 'SET_TITLE': return {
-      ...state,
-      title: 'Register ganti title'
-    } ;
-    case 'SET_FORM': return {
-      ...state,
-      form: {
-        ...state.form,
-        [action.inputType]: action.inputValue
-      }
-    };
-    case 'REGISTER': return {
-      ...state,
-      form: [
-        ...state.form,
-        action.payload
-      ]
-    };
-    default:  return state;
-  }
-}
-const LoginReducer = (state = initialStateLogin, action) => {
+const BooksReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'LOGIN':
       return {
         ...state,
-        ...action.payload,
-        isLogin: true
-        }  
+        user: action.payload,
+        isLogin: true,
+        isLoading: false,
+      };
+    case 'REGISTER':
+      return {
+        ...state,
+        form: [...state.form, action.payload],
+      };
     default:
-    return state
+    case 'GET_BOOKS':
+      return {
+        ...state,
+        books: action.payload,
+        isLoading: false
+      }
   }
-}
-const reducer = combineReducers({
-  RegisterReducer,
-  LoginReducer
-})
+};
 
-
-export default reducer;
+export default BooksReducer;
