@@ -18,23 +18,22 @@ const HomeScreen = ({navigation}) => {
   })
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(user.tokens.access.token);
-    console.log('book', books);
     dispatch(getDataBooks(user.tokens.access.token))
   }, []);
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      {books.map(book => (
-      <Text>{book.title}</Text>
-      // <Icon name="rocket" size={30} color="#900" />
-      // <Facebook />
-      // <Rating
-      //   showRating
-      //   // onFinishRating={this.ratingCompleted}
-      //   style={{paddingVertical: 10}}
-      // />
+      {books?.map(book => (
+        <View key={book.id}>
+          <Text>{book.title}</Text>
+        </View>
       ))}
+      <Icon name="rocket" size={30} color="#900" />
+      <Facebook />
+      <Rating
+      showRating
+      style={{paddingVertical: 10}}
+      />
     </View>
   )
 }

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, Button, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
+import {View, Button, TouchableOpacity, Text, StyleSheet, Image, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {Input} from '../../Components';
 import {LoggedIn} from '../../redux';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {PRIMARY_COLOR} from '../../utils/constant';
 import {LoginDraw} from '../../Assets';
 import {bgImageLogin} from '../../Assets';
@@ -12,6 +12,10 @@ import { getDataBooks } from '../../redux';
 
 const Login = () => {
   const navigation = useNavigation();
+  const isLogin  = useSelector(state => {
+    console.log('User Login: ', state.appData.isLogin)
+    return state.appData.isLogin;
+  });
   // remove these initial assignments after testing
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,9 +28,11 @@ const Login = () => {
     };
     console.log('form: ', data);
     dispatch(LoggedIn(data));
-    setEmail('');
-    setPassword('');
-    navigation.navigate('Home')
+    if (isLogin === true) {
+      navigation.replace('Home')
+    } else {
+      Alert.alert('Login Failed', 'Incorrect email or password')
+    }
   };
 
 

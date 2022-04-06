@@ -4,6 +4,7 @@ const initialState = {
   bookDetail: [],
   isLogin: false,
   isLoading: false,
+  userRegister: true,
 };
 
 const BooksReducer = (state = initialState, action) => {
@@ -18,15 +19,22 @@ const BooksReducer = (state = initialState, action) => {
     case 'REGISTER':
       return {
         ...state,
-        form: [...state.form, action.payload],
+        // form: [...state.form, action.payload],
+        userRegister: true,
       };
-    default:
     case 'GET_BOOKS':
       return {
         ...state,
         books: action.payload,
         isLoading: false
       }
+    case 'REGISTER_SUCCESS':
+      return {
+        ...state,
+        userRegister: action.payload,
+      }
+      default:
+        return state
   }
 };
 

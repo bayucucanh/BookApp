@@ -29,7 +29,7 @@ const RegisterSuccess = () => {
         loop
       />
       <Text style={styles.txtInfo}>We sent email verification to your email</Text>
-      {/* <Button title="Login" color="#fd9210" onPress={() => navigation.navigate('Login')} /> */}
+      <Button title="Login" color="#fd9210" onPress={() => navigation.navigate('Login')} />
     </View>
   );
 };

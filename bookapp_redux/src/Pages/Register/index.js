@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   Button,
+  Alert
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Input} from '../../Components';
@@ -12,15 +13,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setForm, Regis} from '../../redux';
 import styles from '../Login/styles';
 import {bgImageLogin} from '../../Assets';
-import {useNavigation} from '@react-navigation/native';
 
-const Register = () => {
-  const navigation = useNavigation();
+const Register = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // const {form} = useSelector(state => state.RegisterReducer);
   const dispatch = useDispatch();
+  const userRegister  = useSelector(state => {
+    console.log('User Register: ', state.appData.userRegister)
+    return state.appData.userRegister;
+  });
 
   const sendData = () => {
     const data = {
@@ -30,11 +33,16 @@ const Register = () => {
     };
     console.log('form: ', data);
     dispatch(Regis(data));
-    setName('');
-    setEmail('');
-    setPassword('');
-    navigation.navigate('RegisterSuccess')
+    if (userRegister === true) {
+      navigation.replace('RegisterSuccess')
+    } else {
+      Alert.alert('Register Failed', 'Please Try Again');
+    }
   };
+
+  // useEffect(() => {
+  //   console.log(userRegister);
+  // }, []);
 
   // Apabila input sedang berubah maka terima value dari form
   // const onInputChange = (value, inputType) => {
