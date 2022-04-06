@@ -24,19 +24,21 @@ export const getBooks = data => ({
   payload: data,
 });
 
-export const Regis = data => async dispatch => {
+export const registerSuccess = val => ({
+  type: 'REGISTER_SUCCESS',
+  payload: val
+})
+
+export const Regis = (data, navigation) => async dispatch => {
   try {
     await axios
       .post('http://code.aldipee.com/api/v1/auth/register', data)
       .then(response => {
         console.log(response.data.message);
-        if (response.data.success) {
-          Alert.alert('Register Success', response.data.message);
-        }
       });
     dispatch(register(data));
   } catch (err) {
-    Alert.alert('Register Failed');
+    dispatch(registerSuccess(false))
     console.log(err);
   }
 };
@@ -46,12 +48,10 @@ export const LoggedIn = data => async dispatch => {
     await axios
       .post('http://code.aldipee.com/api/v1/auth/login', data)
       .then(response => {
-        Alert.alert('Login Success');
         console.log(response.data);
         dispatch(login(response.data));
       });
   } catch (err) {
-    Alert.alert('Login Failed');
     console.log(err);
   }
 };
