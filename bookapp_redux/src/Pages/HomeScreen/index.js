@@ -5,6 +5,9 @@ import {Facebook} from '../../Assets';
 import {Rating, AirbnbRating} from 'react-native-ratings';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDataBooks } from '../../redux';
+import styles from './styles';
+import Recommended from '../../Components/atoms/Recommended';
+import LatestUpload from '../../Components/atoms/LatesUpload';
 
 const HomeScreen = ({navigation}) => {
   // const isLoading = useSelector(state => state.appData.isLoading);
@@ -13,7 +16,7 @@ const HomeScreen = ({navigation}) => {
     return state.appData.user;
   });
   const books = useSelector(state => {
-    console.log('State: ', state.appData.books);
+    console.log('Books: ', state.appData.books);
     return state.appData.books;
   })
   const dispatch = useDispatch();
@@ -22,18 +25,15 @@ const HomeScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      {books?.map(book => (
+    <View style={styles.container}>
+      {/* {books?.map(book => (
         <View key={book.id}>
           <Text>{book.title}</Text>
         </View>
-      ))}
-      <Icon name="rocket" size={30} color="#900" />
-      <Facebook />
-      <Rating
-      showRating
-      style={{paddingVertical: 10}}
-      />
+      ))} */}
+      <Text style={styles.name}>Hallo, {user.user.name}</Text>
+      <Recommended data={books}/>
+      <LatestUpload data={books}/>
     </View>
   )
 }

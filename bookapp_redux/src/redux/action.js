@@ -52,6 +52,7 @@ export const LoggedIn = data => async dispatch => {
         dispatch(login(response.data));
       });
   } catch (err) {
+    Alert.alert('Login Failed', 'Incorrect email or password')
     console.log(err);
   }
 };

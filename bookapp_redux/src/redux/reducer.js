@@ -4,7 +4,7 @@ const initialState = {
   bookDetail: [],
   isLogin: false,
   isLoading: false,
-  userRegister: true,
+  userRegister: false,
 };
 
 const BooksReducer = (state = initialState, action) => {
