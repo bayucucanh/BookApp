@@ -22,6 +22,7 @@ const Recommended = data => {
         <View >
           <TouchableOpacity
             style={styles.wrapper}
+            key={item.id}
             onPress={() => navigation.navigate('Detail', {id: item.id})}>
             <Image
               style={styles.bookCover}

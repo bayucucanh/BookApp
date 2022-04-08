@@ -12,8 +12,8 @@ const BooksReducer = (state = initialState, action) => {
     case 'LOGIN':
       return {
         ...state,
-        user: action.payload,
         isLogin: true,
+        user: action.payload,
         isLoading: false,
       };
     case 'REGISTER':

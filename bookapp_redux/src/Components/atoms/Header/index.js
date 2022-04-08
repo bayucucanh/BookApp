@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 import React from 'react';
 import {background} from '../../../Assets';
-import {PRIMARY_COLOR, PRIMARY_TEXT} from '../../../utils/constant';
+import {PRIMARY_COLOR, PRIMARY_TEXT, SECOND_COLOR} from '../../../utils/constant';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
+import IconFontAwasome from 'react-native-vector-icons/dist/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
 const Header = ({data}) => {
@@ -34,16 +35,16 @@ const Header = ({data}) => {
         </View>
         <View style={styles.bookInfo}>
           <View style={styles.rating}>
-            <Text>{data.average_rating}</Text>
-            <Text>Rating</Text>
+            <Text style={styles.dataInfo}>{data.average_rating} <IconFontAwasome name='star' color={SECOND_COLOR}/></Text>
+            <Text style={styles.titleInfo}>Rating</Text>
           </View>
           <View style={styles.totalSale}>
-            <Text style={{textAlign: 'center'}}>{data.total_sale}</Text>
-            <Text style={{textAlign: 'center'}}>Total Sale</Text>
+            <Text style={styles.dataInfo}>{data.total_sale}</Text>
+            <Text style={styles.titleInfo}>Total Sale</Text>
           </View>
           <View style={styles.button}>
             <TouchableOpacity style={styles.buttonBuy}>
-              <Text style={{color: 'white'}}>Buy Rp.{data.price}</Text>
+              <Text style={{color: 'white', fontWeight: 'bold'}}>Buy Rp.{data.price}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -81,27 +82,25 @@ const styles = StyleSheet.create({
   },
   rating: {
     flex: 1,
-    backgroundColor: 'yellow',
     justifyContent: 'center',
     alignItems: 'center',
   },
   totalSale: {
     flex: 1,
-    backgroundColor: 'red',
     justifyContent: 'center',
   },
   button: {
     flex: 2,
-    backgroundColor: 'pink',
     justifyContent: 'center',
     padding: 5,
   },
   buttonBuy: {
     width: '100%',
     height: '70%',
-    backgroundColor: 'black',
+    backgroundColor: SECOND_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 7
   },
   bookTitle: {
     color: PRIMARY_TEXT,
@@ -117,5 +116,14 @@ const styles = StyleSheet.create({
   },
   buttonBack: {
     position: 'absolute', top: 5, left: 5
+  },
+  titleInfo: {
+    color: SECOND_COLOR,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  dataInfo: {
+    color: PRIMARY_TEXT,
+    textAlign: 'center'
   }
 });

@@ -86,7 +86,7 @@ export const getDetailBooks = (id, token) => {
         },
       })
       .then(response => {
-        console.log(response);
+        console.log(response.data);
         dispatch(getDetail(response.data))
       });
   };

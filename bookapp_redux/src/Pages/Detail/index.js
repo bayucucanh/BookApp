@@ -26,8 +26,8 @@ const Detail = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Header data={book} />
-        <Synopsis data={book} />
+        <Header data={book}/>
+        <Synopsis data={book}/>
       </ScrollView>
     </View>
   );
