@@ -7,20 +7,29 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {PRIMARY_COLOR, PRIMARY_TEXT, SECOND_COLOR, SECOND_TEXT} from '../../../utils/constant';
+import {
+  PRIMARY_COLOR,
+  PRIMARY_TEXT,
+  SECOND_COLOR,
+} from '../../../utils/constant';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import IconFontAwasome from 'react-native-vector-icons/dist/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
-import { notification } from '../Notification';
+import {useNavigation} from '@react-navigation/native';
+import {notification} from '../Notification';
+import NumberFormat from 'react-number-format';
 
 const Header = ({data}) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const clickNotification = () => {
     notification.configure();
-    notification.createChannel("1")
-    notification.sendNotification("1", 'Buy Success', `you have successfully purchased a book ${data.title}`);
-  }
+    notification.createChannel('1');
+    notification.sendNotification(
+      '1',
+      'Buy Success',
+      `you have successfully purchased a book ${data.title}`,
+    );
+  };
   return (
     <View>
       <ImageBackground
@@ -41,7 +50,10 @@ const Header = ({data}) => {
         </View>
         <View style={styles.bookInfo}>
           <View style={styles.bookInfoDetail}>
-            <Text style={styles.dataInfo}>{data.average_rating} <IconFontAwasome name='star' color={SECOND_COLOR}/></Text>
+            <Text style={styles.dataInfo}>
+              {data.average_rating}{' '}
+              <IconFontAwasome name="star" color={SECOND_COLOR} />
+            </Text>
             <Text style={styles.titleInfo}>Rating</Text>
           </View>
           <View style={styles.bookInfoDetail}>
@@ -49,13 +61,25 @@ const Header = ({data}) => {
             <Text style={styles.titleInfo}>Total Sale</Text>
           </View>
           <View style={styles.button}>
-            <TouchableOpacity style={styles.buttonBuy} onPress={clickNotification}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}>Buy Rp.{data.price}</Text>
+            <TouchableOpacity
+              style={styles.buttonBuy}
+              onPress={clickNotification}>
+              <NumberFormat
+                value={data.price}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'Rp '}
+                renderText={value => (
+                  <Text style={styles.priceBook}>Buy {value}</Text>
+                )}
+              />
             </TouchableOpacity>
           </View>
         </View>
       </ImageBackground>
-      <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        style={styles.buttonBack}
+        onPress={() => navigation.goBack()}>
         <Icon name="arrow-back-circle" size={45} />
       </TouchableOpacity>
     </View>
@@ -102,7 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: SECOND_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 7
+    borderRadius: 7,
   },
   bookTitle: {
     color: PRIMARY_TEXT,
@@ -117,15 +141,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   buttonBack: {
-    position: 'absolute', top: 5, left: 5
+    position: 'absolute',
+    top: 5,
+    left: 5,
   },
   titleInfo: {
     color: SECOND_COLOR,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   dataInfo: {
     color: PRIMARY_TEXT,
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  priceBook: {
+    color: 'white', fontWeight: 'bold'
   }
 });

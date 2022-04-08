@@ -10,17 +10,11 @@ import {
 import React from 'react';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
+import NumberFormat from 'react-number-format';
 
 const Recommended = data => {
   const navigation = useNavigation();
   console.log('data recommended', data.data);
-
-  function convertNumber (number) {
-    const format = number.toString().split('').reverse().join('');
-    const convert = format.match(/\d{1,3}/g);
-    const rp = 'Rp. ' + convert.join('.').split('').reverse().join('');
-    return rp ;
-  }
 
   return (
     <View style={{flexDirection: 'row'}}>
@@ -39,7 +33,13 @@ const Recommended = data => {
               }}
             />
             <Text style={styles.bookTitle}>{item.title}</Text>
-            <Text style={styles.priceBook}></Text>
+            <NumberFormat
+              value={item.price}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'Rp '}
+              renderText={value => <Text style={styles.priceBook}>{value}</Text>}
+            />
           </TouchableOpacity>
         </View>
       ))}
