@@ -4,6 +4,7 @@ import {PRIMARY_COLOR} from '../../../utils/constant';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/dist/MaterialIcons';
 import ShareSocial from 'react-native-share';
+import { notification } from '../Notification';
 
 const Synopsis = ({data}) => {
 
@@ -20,6 +21,11 @@ const Synopsis = ({data}) => {
     }
   };
 
+  const clickNotification = () => {
+    notification.configure();
+    notification.createChannel("1")
+    notification.sendNotification("1", 'Notification', `you like books ${data.title}`);
+  }
 
   console.log(data);
   return (
@@ -27,7 +33,7 @@ const Synopsis = ({data}) => {
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Text style={styles.title}>Synopsis</Text>
         <View style={{ flexDirection: 'row'}}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={clickNotification}>
             <MaterialIcon name='favorite' size={30} color='red'/>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={onShare}>

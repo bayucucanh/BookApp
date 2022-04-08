@@ -5,14 +5,16 @@ import {
   Image,
   TouchableOpacity,
   Button,
-  Alert
+  Alert,
+  StatusBar
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Input} from '../../Components';
 import {useDispatch, useSelector} from 'react-redux';
-import {setForm, Regis} from '../../redux';
+import {Regis} from '../../redux';
 import styles from '../Login/styles';
 import {bgImageLogin} from '../../Assets';
+import { PRIMARY_COLOR } from '../../utils/constant';
 
 const Register = ({navigation}) => {
   const [name, setName] = useState('');
@@ -51,6 +53,9 @@ const Register = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        backgroundColor={PRIMARY_COLOR}
+      />
       <Image source={bgImageLogin} style={styles.imgBg} />
       <View style={styles.listInput}>
         <Text style={styles.title}>Create your account</Text>

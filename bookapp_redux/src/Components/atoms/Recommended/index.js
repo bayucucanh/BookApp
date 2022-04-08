@@ -10,10 +10,12 @@ import {
 import React from 'react';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
+import NumberFormat from 'react-number-format';
 
 const Recommended = data => {
   const navigation = useNavigation();
   console.log('data recommended', data.data);
+
   return (
     <View style={{flexDirection: 'row'}}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -22,6 +24,7 @@ const Recommended = data => {
         <View >
           <TouchableOpacity
             style={styles.wrapper}
+            key={item.id}
             onPress={() => navigation.navigate('Detail', {id: item.id})}>
             <Image
               style={styles.bookCover}
@@ -30,7 +33,13 @@ const Recommended = data => {
               }}
             />
             <Text style={styles.bookTitle}>{item.title}</Text>
-            <Text style={styles.priceBook}>{item.price}</Text>
+            <NumberFormat
+              value={item.price}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'Rp '}
+              renderText={value => <Text style={styles.priceBook}>{value}</Text>}
+            />
           </TouchableOpacity>
         </View>
       ))}

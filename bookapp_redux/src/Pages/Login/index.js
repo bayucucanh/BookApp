@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {View, Button, TouchableOpacity, Text, StyleSheet, Image, Alert} from 'react-native';
+import React, {useState} from 'react';
+import {View, Button, TouchableOpacity, Text, Image, StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {Input} from '../../Components';
 import {LoggedIn} from '../../redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {PRIMARY_COLOR} from '../../utils/constant';
-import {LoginDraw} from '../../Assets';
 import {bgImageLogin} from '../../Assets';
 import styles from './styles';
-import { getDataBooks } from '../../redux';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -35,6 +33,9 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar
+        backgroundColor={PRIMARY_COLOR}
+      />
       {/* <LoginDraw style={styles.draw} width={250} height={250}/> */}
       <Image source={bgImageLogin} style={styles.imgBg} />
 
