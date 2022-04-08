@@ -14,6 +14,14 @@ import {useNavigation} from '@react-navigation/native';
 const Recommended = data => {
   const navigation = useNavigation();
   console.log('data recommended', data.data);
+
+  function convertNumber (number) {
+    const format = number.toString().split('').reverse().join('');
+    const convert = format.match(/\d{1,3}/g);
+    const rp = 'Rp. ' + convert.join('.').split('').reverse().join('');
+    return rp ;
+  }
+
   return (
     <View style={{flexDirection: 'row'}}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -31,7 +39,7 @@ const Recommended = data => {
               }}
             />
             <Text style={styles.bookTitle}>{item.title}</Text>
-            <Text style={styles.priceBook}>{item.price}</Text>
+            <Text style={styles.priceBook}></Text>
           </TouchableOpacity>
         </View>
       ))}

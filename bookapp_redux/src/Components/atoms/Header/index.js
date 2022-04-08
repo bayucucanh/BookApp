@@ -7,14 +7,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {background} from '../../../Assets';
-import {PRIMARY_COLOR, PRIMARY_TEXT, SECOND_COLOR} from '../../../utils/constant';
+import {PRIMARY_COLOR, PRIMARY_TEXT, SECOND_COLOR, SECOND_TEXT} from '../../../utils/constant';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import IconFontAwasome from 'react-native-vector-icons/dist/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { notification } from '../Notification';
 
 const Header = ({data}) => {
   const navigation = useNavigation()
+
+  const clickNotification = () => {
+    notification.configure();
+    notification.createChannel("1")
+    notification.sendNotification("1", 'Buy Success', `you have successfully purchased a book ${data.title}`);
+  }
   return (
     <View>
       <ImageBackground
@@ -34,16 +40,16 @@ const Header = ({data}) => {
           <Text style={styles.bookAuthor}>{data.author}</Text>
         </View>
         <View style={styles.bookInfo}>
-          <View style={styles.rating}>
+          <View style={styles.bookInfoDetail}>
             <Text style={styles.dataInfo}>{data.average_rating} <IconFontAwasome name='star' color={SECOND_COLOR}/></Text>
             <Text style={styles.titleInfo}>Rating</Text>
           </View>
-          <View style={styles.totalSale}>
+          <View style={styles.bookInfoDetail}>
             <Text style={styles.dataInfo}>{data.total_sale}</Text>
             <Text style={styles.titleInfo}>Total Sale</Text>
           </View>
           <View style={styles.button}>
-            <TouchableOpacity style={styles.buttonBuy}>
+            <TouchableOpacity style={styles.buttonBuy} onPress={clickNotification}>
               <Text style={{color: 'white', fontWeight: 'bold'}}>Buy Rp.{data.price}</Text>
             </TouchableOpacity>
           </View>
@@ -80,14 +86,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 10,
   },
-  rating: {
+  bookInfoDetail: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  totalSale: {
-    flex: 1,
-    justifyContent: 'center',
   },
   button: {
     flex: 2,

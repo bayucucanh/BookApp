@@ -8,14 +8,16 @@ import { PRIMARY_TEXT, SECOND_COLOR } from '../../../utils/constant';
 
 const PopularBooks = data => {
   const navigation = useNavigation();
+
+  function AverageRatingSort(a, b) {
+    return parseFloat(b.average_rating) - parseFloat(a.average_rating);
+  }
+  
   return (
     <View style={styles.wrapper}>
-      {/* {data.data?.map(item => ( ))} */}
-      
-      {/* <Text style={styles.title}>Latest Upload</Text> */}
       <View style={styles.popularBooks}>
-      {data.data?.map(item => (
-        <TouchableOpacity style={styles.bookInfo} onPress={() => navigation.navigate('Detail', {id: item.id})}>
+      {data.data.sort(AverageRatingSort).map(item => (
+        <TouchableOpacity style={styles.bookInfo} onPress={() => navigation.navigate('Detail', {id: item.id})} key={item.id}>
           <Image style={styles.bookCover} source={{ uri: item.cover_image }}/>
           <Text style={styles.bookTitle}>{item.title}</Text>
           <Text style={styles.priceBook}>{item.author}</Text>
