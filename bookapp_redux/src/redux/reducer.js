@@ -33,6 +33,12 @@ const BooksReducer = (state = initialState, action) => {
         ...state,
         userRegister: action.payload,
       }
+    case 'GET_DETAIL':
+      return {
+        ...state,
+        bookDetail: action.payload,
+        isLoading: false
+      }
       default:
         return state
   }

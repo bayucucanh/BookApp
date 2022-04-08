@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({ 
   wrapper: {
     width: 120,
-    marginRight: 12
+    marginRight: 12,
+    // flexDirection: 'row'
   },
   title: {
     fontSize: 17,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     color: '#ffffff',
     fontSize: 12
-  }
+  },
 })
 
 export default styles
