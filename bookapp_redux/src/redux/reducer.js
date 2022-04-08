@@ -4,7 +4,7 @@ const initialState = {
   bookDetail: [],
   isLogin: false,
   isLoading: false,
-  userRegister: true,
+  userRegister: false,
 };
 
 const BooksReducer = (state = initialState, action) => {
@@ -32,6 +32,12 @@ const BooksReducer = (state = initialState, action) => {
       return {
         ...state,
         userRegister: action.payload,
+      }
+    case 'GET_DETAIL':
+      return {
+        ...state,
+        bookDetail: action.payload,
+        isLoading: false
       }
       default:
         return state

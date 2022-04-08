@@ -26,12 +26,9 @@ const Login = () => {
       email: email,
       password: password,
     };
-    console.log('form: ', data);
     dispatch(LoggedIn(data));
     if (isLogin === true) {
       navigation.replace('Home')
-    } else {
-      Alert.alert('Login Failed', 'Incorrect email or password')
     }
   };
 

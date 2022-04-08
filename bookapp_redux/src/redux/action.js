@@ -24,12 +24,17 @@ export const getBooks = data => ({
   payload: data,
 });
 
+export const getDetail = data => ({
+  type: 'GET_DETAIL',
+  payload: data
+})
+
 export const registerSuccess = val => ({
   type: 'REGISTER_SUCCESS',
   payload: val
 })
 
-export const Regis = (data, navigation) => async dispatch => {
+export const Regis = (data) => async dispatch => {
   try {
     await axios
       .post('http://code.aldipee.com/api/v1/auth/register', data)
@@ -52,6 +57,7 @@ export const LoggedIn = data => async dispatch => {
         dispatch(login(response.data));
       });
   } catch (err) {
+    Alert.alert('Login Failed', 'Incorrect email or password')
     console.log(err);
   }
 };
@@ -67,6 +73,21 @@ export const getDataBooks = token => {
       .then(response => {
         console.log(response);
         dispatch(getBooks(response.data.results))
+      });
+  };
+};
+
+export const getDetailBooks = (id, token) => {
+  return async dispatch => {
+    await axios
+      .get(`http://code.aldipee.com/api/v1/books/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      })
+      .then(response => {
+        console.log(response);
+        dispatch(getDetail(response.data))
       });
   };
 };
