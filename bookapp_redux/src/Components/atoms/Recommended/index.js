@@ -32,7 +32,7 @@ const Recommended = data => {
                 uri: item.cover_image,
               }}
             />
-            <Text style={styles.bookTitle}>{item.title}</Text>
+            <Text style={styles.bookTitle} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
             <NumberFormat
               value={item.price}
               displayType={'text'}

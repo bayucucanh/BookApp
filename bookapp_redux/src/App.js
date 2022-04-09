@@ -7,6 +7,7 @@ import NetInfo from '@react-native-community/netinfo';
 import Router from './Router';
 import {Provider} from 'react-redux';
 import {store} from './redux/';
+import NoInternet from './Components/atoms/NoInternet';
 
 function App() {
   const [isOffline, setOfflineStatus] = useState(false);
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       {isOffline ? (
-        <Text>No Internet</Text>
+        <NoInternet />
       ) : (
         <Provider store={store}>
           <NavigationContainer>

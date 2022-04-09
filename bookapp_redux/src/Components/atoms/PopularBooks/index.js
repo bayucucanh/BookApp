@@ -23,7 +23,7 @@ const PopularBooks = data => {
             onPress={() => navigation.navigate('Detail', {id: item.id})}
             key={item.id}>
             <Image style={styles.bookCover} source={{uri: item.cover_image}} />
-            <Text style={styles.bookTitle}>{item.title}</Text>
+            <Text style={styles.bookTitle} numberOfLines={1} ellipsizeMode='tail'>{item.title}</Text>
             <Text style={styles.priceBook}>{item.author}</Text>
             <Text style={styles.priceBook}>{item.publisher}</Text>
             <Text style={styles.priceBook}>
