@@ -4,7 +4,7 @@ import { CARD_COLOR } from '../../../utils/constant'
 
 // rest mengumpulkan semua props yang belum didefinisikan dengan nama props rest
 const Input = ({placeholder, ...rest}) => {
-  return <TextInput style={styles.input} placeholder={placeholder} placeholderTextColor='#ffffff' {...rest}/>
+  return <TextInput style={styles.input} placeholder={placeholder} color='#fff' placeholderTextColor='#ffffff' {...rest}/>
 }
 
 export default Input

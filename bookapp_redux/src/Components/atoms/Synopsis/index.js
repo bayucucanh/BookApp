@@ -24,7 +24,7 @@ const Synopsis = ({data}) => {
   const clickNotification = () => {
     notification.configure();
     notification.createChannel("1")
-    notification.sendNotification("1", 'Notification', `you like books ${data.title}`);
+    notification.sendNotification("1", 'Notification', `You like a book ${data.title}`);
   }
 
   console.log(data);

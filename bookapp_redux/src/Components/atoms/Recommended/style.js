@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     marginTop: 5,
     color: '#ffffff',
-    fontSize: 15
+    fontSize: 15,
+    fontWeight: 'bold'
   },
   priceBook: {
     // textAlign: 'center',

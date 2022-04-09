@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import React, {useEffect} from 'react'
 import LottieView from 'lottie-react-native';
 import { PRIMARY_COLOR } from '../../../utils/constant';
@@ -11,6 +11,9 @@ const Loading = () => {
   });
   return (
     <View style={styles.container}>
+      <StatusBar
+        backgroundColor={PRIMARY_COLOR}
+      />
       <LottieView
         ref={animation}
         loop={false}
