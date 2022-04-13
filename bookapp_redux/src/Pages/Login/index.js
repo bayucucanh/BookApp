@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Button, TouchableOpacity, Text, Image, StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {Input} from '../../Components';
-import {LoggedIn} from '../../redux';
+import {LoggedIn} from '../../redux/';
 import {useDispatch, useSelector} from 'react-redux';
 import {PRIMARY_COLOR} from '../../utils/constant';
 import {bgImageLogin} from '../../Assets';

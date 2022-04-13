@@ -5,17 +5,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistStore, persistReducer } from "redux-persist";
 import BooksReducer from './reducer'
 
-const Reducers = {
+const reducers = {
   appData: BooksReducer
 }
 
-persistConfig = {
+const persistConfig = {
   key: 'root',
-  storage: AsyncStorage
+  storage: AsyncStorage,
+  // blacklist: ['appData'],
 }
 
-const AllReducers = combineReducers(Reducers);
+const configPersist = persistReducer(persistConfig, combineReducers(reducers))
 
-export const store = createStore(AllReducers, applyMiddleware(ReduxThunk, reduxLogger));
+// const AllReducers = combineReducers(Reducers);
 
-export default store
+export const store = createStore(configPersist, applyMiddleware(ReduxThunk, reduxLogger));
+export const Persistor = persistStore(store) 
