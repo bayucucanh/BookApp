@@ -119,7 +119,6 @@ export const getDetailBooks = (id, token) => {
         },
       })
       .then(response => {
-        console.log(response.data);
         dispatch(getDetail(response.data))
         dispatch(loading(false));
         dispatch(refresh(false));

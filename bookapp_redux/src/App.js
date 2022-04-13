@@ -6,8 +6,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import NetInfo from '@react-native-community/netinfo';
 import Router from './Router';
 import {Provider} from 'react-redux';
-import {store} from './redux/';
+import {store, Persistor} from './redux/store';
 import NoInternet from './Components/atoms/NoInternet';
+import {PersistGate} from 'redux-persist/integration/react';
 
 function App() {
   const [isOffline, setOfflineStatus] = useState(false);
@@ -26,9 +27,11 @@ function App() {
         <NoInternet />
       ) : (
         <Provider store={store}>
-          <NavigationContainer>
-            <Router />
-          </NavigationContainer>
+          <PersistGate loading={null} persistor={Persistor}>
+            <NavigationContainer>
+              <Router />
+            </NavigationContainer>
+          </PersistGate>
         </Provider>
       )}
     </>
